@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% from 'macros.html' import Flash %}
+{{ Flash() }}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<html data-bs-theme="dark">
+    <div class="container-md" style="position: absolute;margin: 150px 400px;">
+        <div class="col-4">
+        <form method="POST" action="/auth/verification" id="login">
+            <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Username</label>
+            <input type="username" class="form-control" id="exampleInputUsername" name="username">
+            <div id="emailHelp" class="form-text">We'll never share your username with anyone else.</div>
+            </div>
+            <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary" value="login" name ="type">Login</button>
+            <button type="submit" class="btn btn-primary" value="register" name ="type">Register</button>
+        </form> 
+    </div>
+    </div>
+</html>
+

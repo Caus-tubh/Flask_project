@@ -1,0 +1,8 @@
+product,quantity,price,name,category,user
+Ladyfinger,15,60,2023-08-02 00:16:54.659742,Vegetables,1
+Ladyfinger,10,60,2023-08-02 14:39:11.982275,Vegetables,1
+Oranges,50,30,2023-08-02 14:39:11.982275,Fruits,1
+Oranges,40,30,2023-08-02 14:39:33.076673,Fruits,2
+Oranges,25,30,2023-08-13 20:38:31.190839,Fruits,2
+Ladyfinger,30,60,2023-08-13 20:38:31.190839,Vegetables,2
+Milk,2,50,2023-08-13 20:42:42.649846,Dairy,3

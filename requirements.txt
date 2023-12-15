@@ -1,0 +1,8 @@
+flask
+Flask-SQLAlchemy
+SQLAlchemy
+flask-restful
+flask-cors
+pillow
+matplotlib
+pandas

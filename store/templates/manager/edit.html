@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+{% from 'macros.html' import Flash %}
+{{ Flash() }}
+<html data-bs-theme="dark">
+    <link rel="stylesheet" href="{{url_for('static',filename='manager.css')}}">
+    <div class="container-sm">
+        <div class="row py-3">
+            <div class="p-lg-5 gy-3">
+                
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="toggle2" checked><h4>Delete category</h4>
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="toggle1"><h4>Edit category</h4>
+                
+                <span id='content1'> 
+                <div class="col-7">
+                <form method="POST" action="/manager/category/edit" id="edit">
+                  <div class="mb-3">
+                      <label for="Newcategoryname" class="form-label"><h4>New category name</h4></label>
+                      <input type="username" class="form-control" id="exampleInputCategory" name="new_category_name">
+                  </div>
+                  <h4>
+                    Old category you want to edit
+                  </h4>
+                  {% for category in categories %}
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="old_category_name" value={{category[0]}} id="flexRadioDefault1">
+                      <label class="form-check-label" for="flexRadioDefault1">
+                        {{category[0]}}
+                      </label>
+                  </div>
+                  {% endfor %}
+                  <h4>Select unit of product</h4>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="quality" id="flexRadioDefault1" value="liquid">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Rs./Litre
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="quality" id="flexRadioDefault2" value="solid" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Rs./Kg
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn-danger">Edit</button>
+                  </form>
+                </div>
+                </span>
+                <span id='content2'>
+                <div class="col-7">
+                    <form method="POST" action="/manager/category/delete" id="delete">
+                      
+                            <h4>
+                              Category you want to delete 
+                            </h4>
+                            {% for category in categories %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="category" value={{category[0]}} id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  {{category[0]}}
+                                </label>
+                            </div>
+                            {% endfor %}
+                      
+                          <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+                </span>
+            </div>
+        </div>
+    </div>
+</html>

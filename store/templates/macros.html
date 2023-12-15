@@ -1,0 +1,99 @@
+{% macro button(status) %}
+    {% if status %}
+    <nav class="navbar-nav bg-body-tertiary">
+        <form class="container">
+        <a href="/auth/logout">
+            <button class="btn btn-sm btn-outline-secondary" type="button">
+            Logout
+            </button>
+        </a>
+        </form>
+    </nav>
+    {% else %}
+    <nav class="navbar-nav bg-body-tertiary">
+        <form class="container">
+        <a href="/auth/login" method="GET">
+            <button class="btn btn-sm btn-outline-secondary" type="button">
+            Login/Register
+            </button>
+        </a>
+        </form>
+    </nav>
+    {% endif%}
+{% endmacro %}
+
+{% macro generate(list,category) %}
+ {% for item in list %}
+    {% if item[0] == category %}
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/{{item[0]}}">{{ item[0] }}</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/browse/{{item[0]}}">{{ item[0] }}</a>
+    </li>
+    {% endif %}
+ {% endfor %}
+{% endmacro %}
+
+{% macro product_maker(itemlist, manager_status) %}
+    {% for item in itemlist %}
+    <div class="col-4">
+        <div class="p-3">
+        <div class="card text-bg-danger text-start" style="width: 18rem;">
+            {% if item.quantity > 0 %}
+            <img src="{{url_for('static', filename=item.product_name+'.jpg')}}" class="card-img-top" height="150">
+            {% else %}
+            <img src="{{url_for('static', filename='OUTOFSTOCK.jpg')}}" class="card-img-top" height="150">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ item.product_name }}</h5>
+              <p class="card-text">{{item.description}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-bg-success">price : &#x20b9;{{ item.price }}</li>
+              <li class="list-group-item text-bg-success">expire date : {{item.expirey_date}}</li>
+              <li class="list-group-item text-bg-success">brand : {{item.supplier}}</li>
+            </ul>
+            <div class="card-body">
+                <div class="row gx-3">
+                <div class="col">
+                <form action="/cart/add" method="POST">
+                    <button type="submit" class="btn btn-primary" value="{{item.product_name}}" name ="product_name">Add to cart</button>
+                </form>
+                </div>
+                {% if manager_status == 1 %}
+                <div class="col">
+                <form action="/manager/product/edit/{{item.product_name}}" method="GET">
+                    <button type="submit" class="btn btn-warning">Edit</button>
+                </form>
+                </div>
+                <div class="col">
+                <form action="/manager/product/delete/{{item.product_name}}" method="GET">
+                    <button type="submit" class="btn btn-dark">Delete</button>
+                </form>
+                </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endmacro %}
+
+{% macro Flash() %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+    <li>
+    <div class="alert alert-warning">
+        {{ message }}
+    </div>
+    </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% endmacro %}
